@@ -2,7 +2,7 @@ version: "2"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-namenode:1.1.0-hadoop2.7.2-java8
     container_name: namenode
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
@@ -12,39 +12,42 @@ services:
       - ./hadoop.env
   
   resourcemanager:
-    image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-resourcemanager:1.1.0-hadoop2.7.2-java8
     container_name: resourcemanager
     depends_on:
       - namenode
       - datanode1
       - datanode2
+      - datanode3      
     env_file:
       - ./hadoop.env
   
   historyserver:
-    image: bde2020/hadoop-historyserver:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-historyserver:1.1.0-hadoop2.7.2-java8
     container_name: historyserver
     depends_on:
       - namenode
       - datanode1
       - datanode2
+      - datanode3      
     volumes:
       - hadoop_historyserver:/hadoop/yarn/timeline
     env_file:
       - ./hadoop.env
   
   nodemanager1:
-    image: bde2020/hadoop-nodemanager:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-nodemanager:1.1.0-hadoop2.7.2-java8
     container_name: nodemanager1
     depends_on:
       - namenode
       - datanode1
       - datanode2
+      - datanode3      
     env_file:
       - ./hadoop.env
   
   datanode1:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-datanode:1.1.0-hadoop2.7.2-java8
     container_name: datanode1
     depends_on:
       - namenode
@@ -54,7 +57,7 @@ services:
       - ./hadoop.env
   
   datanode2:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-datanode:1.1.0-hadoop2.7.2-java8
     container_name: datanode2
     depends_on:
       - namenode
@@ -64,7 +67,7 @@ services:
       - ./hadoop.env
   
   datanode3:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    image: leismile/hadoop-datanode:1.1.0-hadoop2.7.2-java8
     container_name: datanode3
     depends_on:
       - namenode
