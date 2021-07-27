@@ -1,7 +1,7 @@
 FROM debian:8
 MAINTAINER leismile <leismile.sun@gmail.com>
 
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+RUN echo "deb http://ftp.debian.org/debian jessie main" >> /etc/apt/sources.list
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends openjdk-8-jdk
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
