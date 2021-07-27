@@ -1,14 +1,14 @@
 FROM debian:8
 MAINTAINER leismile <leismile.sun@gmail.com>
 
-RUN echo "deb http://ftp.debian.org/debian jessie main" >> /etc/apt/sources.list
+RUN echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends openjdk-8-jdk
+RUN apt-get -o Acquire::Check-Valid-Until=false update && DEBIAN_FRONTEND=noninteractive apt-get install  -t jessie-backports -y --no-install-recommends openjdk-8-jdk
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl
+RUN apt-get -o Acquire::Check-Valid-Until=false update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl
 
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
+RUN gpg --keyserver pgp.key-server.io --recv-keys \
     07617D4968B34D8F13D56E20BE5AAA0BA210C095 \
     2CAC83124870D88586166115220F69801F27E622 \
     4B96409A098DBD511DF2BC18DBAF69BEA7239D59 \
@@ -42,7 +42,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
     4A6AC5C675B6155682729C9E08D51A0A7501105C \
     8B44A05C308955D191956559A5CEE20A90348D47 
 
-RUN gpg --keyserver pool.sks-keyservers.net --recv-key C36C5F0F
+RUN gpg --keyserver pgp.key-server.io --recv-key C36C5F0F
 
 ENV HADOOP_VERSION 2.7.2
 ENV HADOOP_URL https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz 
